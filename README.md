@@ -1,4 +1,4 @@
-![CI](https://github.com/Sebastian-Hester/secure-reservation-api/actions/workflows/ci.yml/badge.svg)
+[![CI](https://github.com/Sebastian-Hester/secure-reservation-api/actions/workflows/ci.yml/badge.svg)](https://github.com/Sebastian-Hester/secure-reservation-api/actions/workflows/ci.yml)
 
 # Secure Reservation API
 
