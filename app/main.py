@@ -8,10 +8,30 @@ from jose import JWTError
 from .security import hash_password, verify_password
 from .auth import create_access_token, decode_token
 from .schemas import RegisterRequest, UserResponse, LoginRequest, TokenResponse
+from .models import Reservation
+from .schemas import ReservationCreate, ReservationResponse
+
 
 
 app = FastAPI(title="Secure Reservation API", version="0.3.0")
+
 bearer_scheme =HTTPBearer()
+
+def get_current_user(
+    creds: HTTPAuthorizationCredentials = Depends(bearer_scheme),
+    db: Session = Depends(get_db),
+) -> User:
+    token = creds.credentials
+    try:
+        payload = decode_token(token)
+        user_id = int(payload.get("sub"))
+    except (JWTError, ValueError, TypeError):
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    return user
 
 @app.on_event("startup")
 def on_startup():
@@ -66,3 +86,34 @@ def me(
     if not user:
         raise HTTPException(status_code=401, detail="Invalid token")
     return user
+
+@app.post("/reservations", response_model=ReservationResponse, status_code=201)
+def create_reservation(
+    payload: ReservationCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    reservation = Reservation(
+        user_id=current_user.id,
+        date=payload.date,
+        party_size=payload.party_size,
+        notes=payload.notes,
+    )
+    db.add(reservation)
+    db.commit()
+    db.refresh(reservation)
+    return reservation
+
+
+@app.get("/reservations", response_model=list[ReservationResponse])
+def list_reservations(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    return (
+        db.query(Reservation)
+        .filter(Reservation.user_id == current_user.id)
+        .order_by(Reservation.id.desc())
+        .all()
+    )
+

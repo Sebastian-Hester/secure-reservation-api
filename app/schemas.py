@@ -19,3 +19,18 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+class ReservationCreate(BaseModel):
+    date: str = Field(min_length=10, max_length=10)  # YYYY-MM-DD (we'll validate later)
+    party_size: int = Field(ge=1, le=20)
+    notes: str | None = Field(default=None, max_length=500)
+
+class ReservationResponse(BaseModel):
+    id: int
+    user_id: int
+    date: str
+    party_size: int
+    notes: str | None
+
+    class Config:
+        from_attributes = True
