@@ -1,7 +1,5 @@
 # Secure Reservation API
 
-
-
 FastAPI + SQLite backend showcasing secure authentication and role-safe data access.
 
 ## Features
@@ -19,14 +17,8 @@ python -m venv .venv
 # Windows PowerShell:
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-python -m uvicorn app.main:app --reload```
+python -m uvicorn app.main:app --reload
 
-
-
-
-## Tests
-```bash
-pytest -q```
 
 
 
