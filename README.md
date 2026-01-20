@@ -1,3 +1,5 @@
+![CI](https://github.com/Sebastian-Hester/secure-reservation-api/actions/workflows/ci.yml/badge.svg)
+
 # Secure Reservation API
 
 FastAPI + SQLite backend showcasing secure authentication and role-safe data access.
