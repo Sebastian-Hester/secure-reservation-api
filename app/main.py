@@ -1,8 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from .db import engine, get_db
-from .models import Base, User
+from .db import get_db
+from .models import User
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import JWTError
 from .security import hash_password, verify_password
@@ -33,9 +33,6 @@ def get_current_user(
         raise HTTPException(status_code=401, detail="Invalid token")
     return user
 
-@app.on_event("startup")
-def on_startup():
-    Base.metadata.create_all(bind=engine)
 
 @app.get("/health")
 def health():

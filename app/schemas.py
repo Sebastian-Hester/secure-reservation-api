@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
+from datetime import datetime
 
 class RegisterRequest(BaseModel):
     email: EmailStr
@@ -30,7 +31,8 @@ class ReservationResponse(BaseModel):
     user_id: int
     date: str
     party_size: int
-    notes: str | None
+    notes: str | None = None
+    created_at: datetime
 
     class Config:
         from_attributes = True

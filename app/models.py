@@ -1,8 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .db import Base
-
+from sqlalchemy import func
 
 class User(Base):
     __tablename__ = "users"
@@ -25,5 +25,12 @@ class Reservation(Base):
     date: Mapped[str] = mapped_column(String(10), nullable=False)  # validate later
     party_size: Mapped[int] = mapped_column(Integer, nullable=False)
     notes: Mapped[str | None] = mapped_column(String(500), nullable=True)
+
+    created_at: Mapped[datetime] = mapped_column(
+	DateTime(timezone=True),
+        server_default=func.now(),
+	nullable=False,
+	
+    )
 
     user: Mapped["User"] = relationship(back_populates="reservations")
