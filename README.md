@@ -27,6 +27,33 @@ python -m uvicorn app.main:app --reload
 pytest -q
 ```
 
+# Projects
+
+## 📊 Secure Reservation System – Analytics Dashboard
+
+This project extends a secure FastAPI backend into an analytics workflow by exporting operational metrics and visualizing them in Tableau.
+
+**Live Tableau Dashboard:**  
+https://public.tableau.com/views/SecureReservationSystem-OperationalMetrics/SecureReservationSystem-OperationalMetrics
+
+### What This Demonstrates
+- End-to-end data flow from API → database → analytics → dashboard
+- SQL-driven aggregation of operational metrics
+- Secure backend design paired with business intelligence insights
+
+### Key Metrics Visualized
+- Total reservations created
+- Daily reservation volume trends
+- Average party size trends over time
+- Reservations by day of week
+
+### Tech Stack
+- FastAPI (Python)
+- SQLAlchemy + SQLite
+- Alembic migrations
+- SQL aggregations
+- Tableau Public
+
 
 
 
