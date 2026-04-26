@@ -1,0 +1,17 @@
+id,user_id,user_email,date,party_size,notes,created_at
+14,1,sebas1@example.com,2026-01-30,5,High chair needed,2026-01-22T17:50:31.386975
+2,1,sebas1@example.com,2026-01-25,2,Quiet area,2026-01-21T17:50:31.386975
+10,1,sebas1@example.com,2026-01-29,6,High chair needed,2026-01-21T17:50:31.386975
+1,1,sebas1@example.com,04-12-2026,5,window,2026-01-21 05:16:42
+3,1,sebas1@example.com,2026-01-25,5,Birthday,2026-01-20T17:50:31.386975
+12,1,sebas1@example.com,2026-01-24,5,Anniversary,2026-01-20T17:50:31.386975
+8,1,sebas1@example.com,2026-01-21,4,Anniversary,2026-01-19T17:50:31.386975
+4,1,sebas1@example.com,2026-01-24,3,Birthday,2026-01-18T17:50:31.386975
+5,1,sebas1@example.com,2026-01-18,3,Window seat,2026-01-17T17:50:31.386975
+15,1,sebas1@example.com,2026-01-22,4,Window seat,2026-01-16T17:50:31.386975
+11,1,sebas1@example.com,2026-01-23,4,High chair needed,2026-01-14T17:50:31.386975
+7,1,sebas1@example.com,2026-01-18,3,Anniversary,2026-01-13T17:50:31.386975
+9,1,sebas1@example.com,2026-01-18,6,,2026-01-13T17:50:31.386975
+16,1,sebas1@example.com,2026-01-22,2,Birthday,2026-01-13T17:50:31.386975
+6,1,sebas1@example.com,2026-01-18,6,Window seat,2026-01-10T17:50:31.386975
+13,1,sebas1@example.com,2026-01-10,2,Anniversary,2026-01-09T17:50:31.386975
