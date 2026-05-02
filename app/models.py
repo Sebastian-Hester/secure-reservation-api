@@ -4,6 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .db import Base
 from sqlalchemy import func
 
+
 class User(Base):
     __tablename__ = "users"
 
@@ -15,6 +16,18 @@ class User(Base):
 
     reservations: Mapped[list["Reservation"]] = relationship(back_populates="user")
 
+class AuditLog(Base):
+    __tablename__ = "audit_logs"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    user_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("users.id"), nullable=True)
+    action: Mapped[str] = mapped_column(String(100), nullable=False)
+    details: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False,
+    )
 
 class Reservation(Base):
     __tablename__ = "reservations"
