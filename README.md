@@ -23,10 +23,23 @@ FastAPI + SQLite backend demonstrating secure authentication, role-based access 
 
 ## 📊 Secure Reservation System – Analytics Dashboard
 
-This project extends a secure FastAPI backend into an analytics workflow by exporting operational metrics and visualizing them in Tableau.
+This dashboard visualizes reservation trends using data generated from a custom-built FastAPI backend. It includes:
 
-**Live Dashboard:**  
-https://public.tableau.com/views/SecureReservationSystem-OperationalMetrics/SecureReservationSystem-OperationalMetrics
+- Daily reservation trends
+- Average party size over time
+- Reservation distribution by day of week
+- KPI summary of total reservations
+
+Data is dynamically exported from the API database into CSV files and visualized in Tableau.
+
+**Live Tableau Dashboard:**  
+
+View the live dashboard here:
+https://public.tableau.com/views/SecureReservationSystemDashboard/Dashboard1
+
+## Dashboard Preview
+
+![Dashboard](assets/dashboard.png)
 
 ### What This Demonstrates
 - End-to-end data flow from API → database → analytics → dashboard
