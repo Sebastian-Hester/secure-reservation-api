@@ -10,7 +10,7 @@ from .auth import create_access_token, decode_token
 from .schemas import RegisterRequest, UserResponse, LoginRequest, TokenResponse
 from .models import Reservation
 from .schemas import ReservationCreate, ReservationResponse
-
+from app.models import AuditLog
 
 
 app = FastAPI(title="Secure Reservation API", version="0.3.0")
@@ -90,15 +90,37 @@ def create_reservation(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    existing_reservation = (
+        db.query(Reservation)
+        .filter(Reservation.date == payload.date)
+        .first()
+    )
+
+    if existing_reservation:
+        raise HTTPException(
+            status_code=400,
+            detail="A reservation already exists for this date."
+        )
     reservation = Reservation(
         user_id=current_user.id,
         date=payload.date,
         party_size=payload.party_size,
         notes=payload.notes,
     )
+
     db.add(reservation)
     db.commit()
     db.refresh(reservation)
+
+    log = AuditLog(
+        user_id=current_user.id,
+        action="reservation_created",
+        details=f"Reservation created for date {reservation.date}"
+    )
+
+    db.add(log)
+    db.commit()
+
     return reservation
 
 
@@ -114,3 +136,6 @@ def list_reservations(
         .all()
     )
 
+@app.get("/logs")
+def get_logs(db: Session = Depends(get_db)):
+    return db.query(AuditLog).all()
