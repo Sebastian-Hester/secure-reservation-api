@@ -2,7 +2,7 @@
 
 # Secure Reservation API
 
-FastAPI + SQLite backend showcasing secure authentication and role-safe data access.
+FastAPI + SQLite backend demonstrating secure authentication, role-based access control, and protected data operations.
 
 ## Features
 - Health endpoint (`GET /health`)
@@ -12,6 +12,14 @@ FastAPI + SQLite backend showcasing secure authentication and role-safe data acc
 - Authenticated reservations:
   - Create reservation (`POST /reservations`)
   - List your reservations (`GET /reservations`)
+
+## Security Features
+
+- Password hashing using Argon2
+- JWT-based authentication and session management
+- Protected endpoints requiring valid tokens
+- Input validation using pydantic models
+- Separation of user data and access control
 
 ## 📊 Secure Reservation System – Analytics Dashboard
 
@@ -54,9 +62,28 @@ python -m uvicorn app.main:app --reload
 pytest -q
 ```
 
+## Example Usage
+
+### Register a User
+POST /auth/register
+
+```json
+{
+  "email": "test@example.com",
+  "password": "securepassword"
+}
+```
+
+## Future Improvements
+
+- Role-based authorization (admin vs user)
+- Rate limiting to prevent abuse
+- Docker containerization
+- Deployment to cloud (AWS/Azure)
+
 # Projects
 
-## 📊 Secure Reservation System – Analytics Dashboard
+## 📊 Tableau + Additional Information
 
 This project extends a secure FastAPI backend into an analytics workflow by exporting operational metrics and visualizing them in Tableau.
 
